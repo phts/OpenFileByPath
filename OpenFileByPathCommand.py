@@ -1,11 +1,12 @@
-import sublime, sublime_plugin
-
-def open_file(window, filename):
-  window.open_file(filename, sublime.ENCODED_POSITION)
+import sublime
+import sublime_plugin
 
 class OpenFileByPathCommand(sublime_plugin.WindowCommand):
   def run(self):
-    def done_callback(filename):
-      open_file(self.window, filename)
+    def done_callback(path):
+      self.open_file(path)
 
     self.window.show_input_panel("Open File by Path: ", "", done_callback, None, None)
+
+  def open_file(self, path):
+    self.window.open_file(path)
